@@ -21,7 +21,6 @@ describe('Send Message Test', () => {
 
         cy.get('[data-l="t,messages"').should('be.visible').click();
 
-        // Navigate to messages page
         cy.get('[data-tsid="conversation_list"]', { timeout: 10000 }).should('be.visible'); // Ждать до 10 секунд
         cy.get('[data-tsid="chat-search-input"]').should('be.visible').type(FRIEND_NAME);
         cy.get('[data-tsid="chat"]').should('be.visible').click();
