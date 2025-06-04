@@ -1,7 +1,12 @@
-const username = 'technopol50';
-const password = 'technopolisPassword';
-
 describe('Group Test', () => {
+  let UserData;
+
+  before(() => {
+    cy.fixture('UserData').then((data) => {
+      UserData = data;
+    });
+  })
+
   it('Позитивная проверка перехода на страницу "Group" без авторизации', () => {
     cy.visit('https://ok.ru');
     cy.xpath("//a[contains(text(),'Группы')]").should('be.visible').click({force:true});
@@ -14,11 +19,11 @@ describe('Group Test', () => {
     cy.visit('https://ok.ru');
     cy.get('#field_email').should('be.visible').as('emailInput');
     cy.get('@emailInput').click({force:true});
-    cy.get('@emailInput').type(username);
+    cy.get('@emailInput').type(UserData.login);
 
     cy.get('#field_password').should('be.visible').as('passwordInput');
     cy.get('@passwordInput').click({force:true});
-    cy.get('@passwordInput').type(password);
+    cy.get('@passwordInput').type(UserData.password);
     cy.get('input.button-pro').scrollIntoView().click({ force: true });
     // здесь появляется капча
     cy.xpath("//a[contains(text(),'Группы')]").should('be.visible').click();

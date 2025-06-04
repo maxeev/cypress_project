@@ -1,4 +1,12 @@
 describe('Send Message Test', () => {
+    let UserData;
+
+    before(() => {
+        cy.fixture('UserData').then((data) => {
+            UserData = data;
+        });
+    })
+
     const loginURL = 'https://ok.ru/';
     const FRIEND_NAME = 'Максим Киселёв';
     const MESSAGE = 'hello!'
@@ -8,8 +16,8 @@ describe('Send Message Test', () => {
         cy.visit(loginURL);
         cy.viewport(1920, 1080); //разрешение экрана для моего устройства
 
-        cy.get('#field_email').type('technopol39');
-        cy.get('#field_password').type('technopolisPassword');
+        cy.get('#field_email').type(UserData.login);
+        cy.get('#field_password').type(UserData.password);
         cy.get('input[data-l="t,sign_in"]').click();
     });
 
